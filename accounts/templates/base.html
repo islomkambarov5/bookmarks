@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>{{ title }}</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- connecting bootstrap -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="<KEY>" crossorigin="anonymous">
+</head>
+<body>
+    <span class="login">Bookmarks</span>
+    {% if request.user.is_authenticated %}
+    <ul class="menu">
+        <li {% if section == "dashboard" %} class="selected" {% endif %}> <a href="{% url 'dashboard' %}">Dashboard</a></li>
+    </ul>
+    {% else %}
+    <ul class="menu">
+        <li {% if section == "login" %} class="selected" {% endif %}> <a href="{% url 'login' %}">Login</a></li>
+        <li {% if section == "register" %} class="selected" {% endif %}> <a href="{% url 'register' %}">Register</a></li>
+    </ul>
+    {% endif %}
+    {% block content %}
+    {% endblock content %}
+</body>
+<!-- connecting bootstrap -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="<KEY>" crossorigin="anonymous"></script>
+</html>
