@@ -12,6 +12,14 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="<KEY>" crossorigin="anonymous">
 </head>
 <body>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{ message.tags }}">
+        {{ message|safe }}
+        <a class="close" href="#">X</a>
+    </div>
+    {% endfor %}
+    {% endif %}
     <span class="login">Bookmarks</span>
     {% if request.user.is_authenticated %}
     <ul class="menu">
@@ -20,7 +28,6 @@
     {% else %}
     <ul class="menu">
         <li {% if section == "login" %} class="selected" {% endif %}> <a href="{% url 'login' %}">Login</a></li>
-        <li {% if section == "register" %} class="selected" {% endif %}> <a href="{% url 'register' %}">Register</a></li>
     </ul>
     {% endif %}
     {% block content %}
